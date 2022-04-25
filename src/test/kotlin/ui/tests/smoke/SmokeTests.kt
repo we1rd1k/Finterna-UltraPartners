@@ -1,33 +1,28 @@
-package ui.tests
+package ui.tests.smoke
 
 import io.qameta.allure.Epic
 import io.qameta.allure.Feature
 import io.qameta.allure.Severity
 import io.qameta.allure.SeverityLevel.CRITICAL
-import io.qameta.allure.Step
 import org.aeonbits.owner.ConfigFactory
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import ui.tests.BaseTest
+import ui.tests.Props
 import ui.tests.data.SMOKE
-import ui.tests.pages.MainPage
+import ui.tests.smoke.steps.`Affiliate Login`
+import ui.tests.smoke.steps.`Affiliate Logout`
 
 
 @Tag(SMOKE)
 @Epic("Affiliate Smoke")
 @Severity(CRITICAL)
-@DisplayName("Login Test")
-class LoginTest : BaseTest() {
+@DisplayName("Smoke Tests")
+class SmokeTests : BaseTest() {
 
     private val props = ConfigFactory.create(Props::class.java)
-    private lateinit var mainPage: MainPage
-
-    @BeforeEach
-    @Step("Initialize or run reusable methods for each test")
-    fun setUp() {
-        mainPage = MainPage()
-    }
 
 
     @Feature("Login test")
@@ -35,11 +30,15 @@ class LoginTest : BaseTest() {
     @Severity(CRITICAL)
     @Test
     fun `Login test`() {
-        mainPage
-            .openMainPage()
-            .clickLoginButton()
-            .fillInEmailField(props.login())
-            .fillInPassField(props.password())
-            .clickLoginSubmitButton()
+        `Affiliate Login`(props.login(), props.password())
+    }
+    @Disabled
+    @Feature("Logout test")
+    @DisplayName("Logout test")
+    @Severity(CRITICAL)
+    @Test
+    fun `Logout test`() {
+        `Affiliate Login`(props.login(), props.password())
+        `Affiliate Logout`()
     }
 }

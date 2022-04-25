@@ -1,6 +1,5 @@
 package ui.tests.pages
 
-import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selenide.`$`
 import com.codeborne.selenide.Selenide.`$x`
 import io.qameta.allure.Step
@@ -16,7 +15,6 @@ class LoginPage {
     private val password = `$`(By.id("pass"))
     private val submitButton = `$x`("//button[@type = 'submit' and .='LOG IN']")
     private val loginFailedMessage = `$x`("//div[contains(text(), 'Login failed: Invalid username or password')]")
-    private val dashBoard = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='Dashboard']")
 
     @Step("Fill in login field: {email}")
     fun fillInEmailField(email: String): LoginPage {
@@ -32,9 +30,9 @@ class LoginPage {
     }
 
     @Step("Click Log in button")
-    fun clickLoginSubmitButton() {
+    fun clickLoginSubmitButton(): AffiliateMainPage {
         log.info("Click Log in button, and wait dashboard appears")
         submitButton.click()
-        dashBoard.shouldBe(visible)
+        return AffiliateMainPage()
     }
 }

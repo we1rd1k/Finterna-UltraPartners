@@ -11,16 +11,16 @@ import org.slf4j.Logger
 import ui.tests.Props
 import kotlin.test.assertEquals
 
-class MainPage {
+open class BasePage {
 
     private val log: Logger = KotlinLogging.logger { }
     private val props = ConfigFactory.create(Props::class.java)
 
-    private val loginButton = `$x`("//div[@class = 'container-fluid']//button[@type = 'submit' and .='LOGIN']")
+    internal val loginButton = `$x`("//div[@class = 'container-fluid']//button[@type = 'submit' and .='LOGIN']")
 
 
     @Step("Open app main web page")
-    fun openMainPage(): MainPage {
+    fun openMainPage(): BasePage {
         log.info("Open web page ${props.ultraPartnersUrl()}")
         open(props.ultraPartnersUrl())
         loginButton.shouldBe(Condition.visible)
