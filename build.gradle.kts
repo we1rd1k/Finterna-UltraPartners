@@ -31,6 +31,8 @@ dependencies {
     implementation("io.qameta.allure:allure-java-commons:$allureVersion")
     implementation("io.qameta.allure:allure-selenide:$allureVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("io.github.serpro69:kotlin-faker:1.8.0")
+    implementation("com.github.javafaker:javafaker:1.0.2")
 }
 
 allure {

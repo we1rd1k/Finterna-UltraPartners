@@ -15,10 +15,11 @@ class AffiliateMainPage: BasePage() {
     private val logoutButton = `$x`("//div[contains(@class, 'dropdown-content')]//p//a[text()='Logout']")
     private val affiliateProfileButton = `$x`("//div[contains(@class, 'menu-top-switch')]//div")
     private val dropDownMenu = `$x`("//section[contains(@class, 'greeting')]//div//p[contains(text(), 'Affiliate')]")
-    private val dashBoard = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='Dashboard']")
 
+
+    @Step("Check we are on affiliate main page")
     fun weAreOnAffiliateMain() {
-        dashBoard.shouldBe(visible)
+        sectionsLink("Dashboard").shouldBe(visible)
     }
 
     @Step("Open account menu")
@@ -37,4 +38,9 @@ class AffiliateMainPage: BasePage() {
         return BasePage()
     }
 
+    @Step("Go to {pageName} page")
+    fun goToPage(pageName: String) {
+        log.info("Go to {0} page")
+        sectionsLink(pageName).click()
+    }
 }

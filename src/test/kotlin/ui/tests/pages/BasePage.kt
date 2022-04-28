@@ -39,5 +39,7 @@ open class BasePage {
         return LoginPage()
     }
 
+    fun sectionsLink(section: String) = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='$section']")
+
 
 }
