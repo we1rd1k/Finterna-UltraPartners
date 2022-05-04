@@ -28,7 +28,7 @@ class SmokeTests : BaseTest() {
     private val props = ConfigFactory.create(Props::class.java)
 
 
-    @Feature("Login test")
+    @Feature("Login")
     @DisplayName("[Affiliate][Authorization]Authorization check")
     @Severity(CRITICAL)
     @Test
@@ -36,7 +36,7 @@ class SmokeTests : BaseTest() {
         `Affiliate Login`(props.login(), props.password())
     }
 
-    @Feature("Logout test")
+    @Feature("Logout")
     @DisplayName("[Affiliate][Logout]")
     @Severity(CRITICAL)
     @Test
@@ -45,6 +45,7 @@ class SmokeTests : BaseTest() {
         `Affiliate Logout`()
     }
 
+    @Feature("Availability of sections")
     @DisplayName("[Affiliate][Sections]Check the availability of sections of the site")
     @Severity(CRITICAL)
     @Test
@@ -53,6 +54,7 @@ class SmokeTests : BaseTest() {
         `Check availability of links`()
     }
 
+    @Feature("Password change")
     @DisplayName("[Affiliate][Change password]")
     @Severity(CRITICAL)
     @Test
@@ -67,6 +69,7 @@ class SmokeTests : BaseTest() {
         `Change password`(testPassword, props.password())
     }
 
+    @Feature("Adding payment details")
     @DisplayName("[Affiliate][Settings][Billing Details]Adding payment details")
     @Severity(CRITICAL)
     @Test
@@ -75,9 +78,10 @@ class SmokeTests : BaseTest() {
         `Add payment info`(neteller = generateRndEmail(), skrill = generateRndEmail(), ecoPayz = generateRndNumber())
     }
 
+    @Feature("Registration fields")
     @DisplayName("[Affiliate][Registration]")
     @Severity(CRITICAL)
-    @ParameterizedTest(name = "{displayName}")
+    @ParameterizedTest(name = "{displayName}, firstName: {0}, lastName: {1}, email: {2}, password: {3}")
     @MethodSource("regPositiveFields")
     fun `Registration fields positive test`(firstName: String, lastName: String, email: String, password: String) {
         `Check registration fields`(firstName, lastName, email, password)
