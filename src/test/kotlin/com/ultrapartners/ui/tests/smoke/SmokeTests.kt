@@ -1,21 +1,22 @@
-package ui.tests.smoke
+package com.ultrapartners.ui.tests.smoke
 
+import com.ultrapartners.ui.tests.BaseTest
+import com.ultrapartners.ui.tests.Props
+import com.ultrapartners.ui.tests.smoke.steps.*
+import com.ultrapartners.ui.tests.utils.generateRndEmail
+import com.ultrapartners.ui.tests.utils.generateRndNumber
 import io.qameta.allure.Epic
 import io.qameta.allure.Feature
 import io.qameta.allure.Severity
 import io.qameta.allure.SeverityLevel.CRITICAL
 import org.aeonbits.owner.ConfigFactory
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import ui.tests.BaseTest
-import ui.tests.Props
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.of
+import org.junit.jupiter.params.provider.MethodSource
 import ui.tests.data.SMOKE
-import ui.tests.smoke.steps.`Affiliate Login`
-import ui.tests.smoke.steps.`Affiliate Logout`
-import ui.tests.smoke.steps.`Change password`
-import ui.tests.smoke.steps.`Check availability of links`
 
 
 @Tag(SMOKE)
@@ -66,12 +67,27 @@ class SmokeTests : BaseTest() {
         `Change password`(testPassword, props.password())
     }
 
-    @Disabled
     @DisplayName("[Affiliate][Settings][Billing Details]Adding payment details")
     @Severity(CRITICAL)
     @Test
     fun `Adding payment details test`() {
         `Affiliate Login`(props.login(), props.password())
-        //TODO: test incomplete
+        `Add payment info`(neteller = generateRndEmail(), skrill = generateRndEmail(), ecoPayz = generateRndNumber())
+    }
+
+    @DisplayName("[Affiliate][Registration]")
+    @Severity(CRITICAL)
+    @ParameterizedTest(name = "{displayName}")
+    @MethodSource("regPositiveFields")
+    fun `Registration fields positive test`(firstName: String, lastName: String, email: String, password: String) {
+        `Check registration fields`(firstName, lastName, email, password)
+    }
+
+    companion object {
+        @JvmStatic
+        fun regPositiveFields() = listOf(
+            of("Maxim", "Maxim", "nastusha@mail.ru", "testtest"),
+            of("Лейла", "Лейла", "pro-tected@gmail.com", "123443213")
+        )
     }
 }

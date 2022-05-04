@@ -1,11 +1,13 @@
-package ui.tests.smoke.steps
+package com.ultrapartners.ui.tests.smoke.steps
 
 import com.codeborne.selenide.Selenide.back
 import com.codeborne.selenide.WebDriverRunner
+import com.ultrapartners.ui.tests.data.SETTINGS
+import com.ultrapartners.ui.tests.pages.AffiliateMainPage
+import com.ultrapartners.ui.tests.pages.BasePage
+import com.ultrapartners.ui.tests.pages.RegistrationPage
+import com.ultrapartners.ui.tests.pages.SettingsPage
 import io.qameta.allure.Step
-import ui.tests.pages.AffiliateMainPage
-import ui.tests.pages.BasePage
-import ui.tests.pages.SettingsPage
 import kotlin.test.assertContains
 
 
@@ -36,7 +38,7 @@ fun `Check availability of links`() {
     )
     linksNames.forEach { s ->
         run {
-            AffiliateMainPage().sectionsLink(s).click()
+            AffiliateMainPage().sideMenu(s).click()
             assertContains(WebDriverRunner.getWebDriver().currentUrl, linksMap.getValue(s), ignoreCase = true)
             if (s == "Media") back()
         }
@@ -45,7 +47,7 @@ fun `Check availability of links`() {
 
 @Step("Change password from {currentPass} to {newPass}")
 fun `Change password`(currentPass: String, newPass: String) {
-    AffiliateMainPage().goToPage("Settings")
+    AffiliateMainPage().goToPage(SETTINGS)
     SettingsPage()
         .weAreOnSettingsPage()
         .goToChangePasswordMenu()
@@ -55,4 +57,23 @@ fun `Change password`(currentPass: String, newPass: String) {
         .submitPasswordChange()
         .closePassModal()
 
+}
+
+fun `Add payment info`(neteller: String, skrill: String, ecoPayz: String) {
+    AffiliateMainPage().goToPage(SETTINGS)
+    SettingsPage()
+        .goToBillingDetails()
+        .fillInNetellerField(neteller)
+        .fillInSkrillField(skrill)
+        .fillIecoPayzField(ecoPayz)
+}
+
+fun `Check registration fields`(firstName: String, lastName: String, email: String, password: String) {
+    RegistrationPage()
+        .openMainPage()
+        .clickJoinUsButton()
+        .fillInFirstNameField(firstName)
+        .fillInLastNameField(lastName)
+        .fillInEmailField(email)
+        .fillInPasswordField(password)
 }

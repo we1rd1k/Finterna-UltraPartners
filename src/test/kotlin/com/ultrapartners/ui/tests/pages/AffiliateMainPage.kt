@@ -1,7 +1,8 @@
-package ui.tests.pages
+package com.ultrapartners.ui.tests.pages
 
 import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selenide.`$x`
+import com.ultrapartners.ui.tests.data.DASHBOARD
 import io.qameta.allure.Step
 import mu.KotlinLogging
 import org.slf4j.Logger
@@ -19,7 +20,7 @@ class AffiliateMainPage: BasePage() {
 
     @Step("Check we are on affiliate main page")
     fun weAreOnAffiliateMain() {
-        sectionsLink("Dashboard").shouldBe(visible)
+        sideMenu(DASHBOARD).shouldBe(visible)
     }
 
     @Step("Open account menu")
@@ -41,6 +42,6 @@ class AffiliateMainPage: BasePage() {
     @Step("Go to {pageName} page")
     fun goToPage(pageName: String) {
         log.info("Go to {0} page")
-        sectionsLink(pageName).click()
+        sideMenu(pageName).click()
     }
 }

@@ -1,4 +1,4 @@
-package ui.tests.pages
+package com.ultrapartners.ui.tests.pages
 
 import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide.`$x`
@@ -8,15 +8,15 @@ import io.qameta.allure.Step
 import mu.KotlinLogging
 import org.aeonbits.owner.ConfigFactory
 import org.slf4j.Logger
-import ui.tests.Props
+import com.ultrapartners.ui.tests.Props
 import kotlin.test.assertEquals
 
 open class BasePage {
 
     private val log: Logger = KotlinLogging.logger { }
     private val props = ConfigFactory.create(Props::class.java)
-
     internal val loginButton = `$x`("//div[@class = 'container-fluid']//button[@type = 'submit' and .='LOGIN']")
+    internal val joinUsButton = `$x`("//div[@class = 'container-fluid']//button[@type = 'submit' and .='JOIN US']")
 
 
     @Step("Open app main web page")
@@ -39,7 +39,16 @@ open class BasePage {
         return LoginPage()
     }
 
-    fun sectionsLink(section: String) = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='$section']")
+    @Step("Click JoinUs button")
+    fun clickJoinUsButton(): RegistrationPage {
+        log.info("Click JoinUs button")
+        joinUsButton.click()
+        `$x`("//h1[text()='JOIN ULTRA PARTNERS']").shouldBe(Condition.visible)
+        assertEquals("${props.ultraPartnersUrl()}/join", WebDriverRunner.getWebDriver().currentUrl)
+        return RegistrationPage()
+    }
+
+    fun sideMenu(section: String) = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='$section']")
 
 
 }

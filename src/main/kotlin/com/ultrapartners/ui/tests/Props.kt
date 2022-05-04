@@ -1,4 +1,4 @@
-package ui.tests
+package com.ultrapartners.ui.tests
 
 import org.aeonbits.owner.Config
 import org.aeonbits.owner.Config.LoadPolicy

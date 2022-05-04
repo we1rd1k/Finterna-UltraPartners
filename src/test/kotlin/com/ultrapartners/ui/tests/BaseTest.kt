@@ -1,4 +1,4 @@
-package ui.tests
+package com.ultrapartners.ui.tests
 
 import com.codeborne.selenide.Configuration
 import com.codeborne.selenide.Selenide

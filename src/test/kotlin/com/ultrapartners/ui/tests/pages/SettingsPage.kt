@@ -1,4 +1,4 @@
-package ui.tests.pages
+package com.ultrapartners.ui.tests.pages
 
 import com.codeborne.selenide.Condition.*
 import com.codeborne.selenide.Selenide.`$`
@@ -27,7 +27,7 @@ class SettingsPage : BasePage() {
 
     @Step("Check we are on Settings page")
     fun weAreOnSettingsPage(): SettingsPage {
-        sectionsLink("Settings").shouldBe(visible)
+        sideMenu("Settings").shouldBe(visible)
         personalDetails.shouldBe(visible)
         return this
     }
@@ -71,10 +71,25 @@ class SettingsPage : BasePage() {
     }
 
     @Step("Go to billing details form")
-    fun goToBillingDetails() {
+    fun goToBillingDetails(): SettingsPage {
         billingDetails.click()
         billingDetails.shouldHave(attributeMatching("class", ".*active.*"))
+        return this
     }
 
+    fun fillInNetellerField(input: String): SettingsPage {
+        netellerField.sendKeys(input)
+        return this
+    }
+
+    fun fillInSkrillField(input: String): SettingsPage {
+        skrillField.sendKeys(input)
+        return this
+    }
+
+    fun fillIecoPayzField(input: String): SettingsPage {
+        ecoPayzField.sendKeys(input)
+        return this
+    }
 
 }

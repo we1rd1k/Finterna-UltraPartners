@@ -1,4 +1,4 @@
-package ui.tests.pages
+package com.ultrapartners.ui.tests.pages
 
 import com.codeborne.selenide.Selenide.`$`
 import com.codeborne.selenide.Selenide.`$x`
