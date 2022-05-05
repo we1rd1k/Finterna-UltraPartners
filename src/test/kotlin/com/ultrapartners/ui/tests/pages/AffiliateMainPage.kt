@@ -8,7 +8,7 @@ import mu.KotlinLogging
 import org.slf4j.Logger
 
 
-class AffiliateMainPage: BasePage() {
+class AffiliateMainPage : BasePage() {
 
     private val log: Logger = KotlinLogging.logger { }
 
@@ -41,7 +41,7 @@ class AffiliateMainPage: BasePage() {
 
     @Step("Go to {pageName} page")
     fun goToPage(pageName: String) {
-        log.info("Go to {0} page")
+        log.info("Go to $pageName page")
         sideMenu(pageName).click()
     }
 }

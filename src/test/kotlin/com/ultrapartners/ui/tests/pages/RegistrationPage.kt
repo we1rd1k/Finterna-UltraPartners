@@ -1,13 +1,16 @@
 package com.ultrapartners.ui.tests.pages
 
 import com.codeborne.selenide.Condition
-import com.codeborne.selenide.Selenide.*
+import com.codeborne.selenide.Condition.hidden
+import com.codeborne.selenide.Selenide.`$`
+import com.codeborne.selenide.Selenide.`$x`
 import io.qameta.allure.Step
 import mu.KotlinLogging
 import org.openqa.selenium.By
+import org.openqa.selenium.Keys
 import org.slf4j.Logger
 
-class RegistrationPage: BasePage() {
+class RegistrationPage : BasePage() {
 
     private val log: Logger = KotlinLogging.logger { }
 
@@ -21,33 +24,37 @@ class RegistrationPage: BasePage() {
 
     @Step("Fill in firstName field: {firstName}")
     fun fillInFirstNameField(firstName: String): RegistrationPage {
-        log.info("Fill in firstName field: {0}")
+        log.info("Fill in firstName field: $firstName")
         firstNameField.sendKeys(firstName)
-        `$x`("//input[@id='pd-name']//..//div[@class='errorMsg-join']").shouldBe(Condition.hidden)
+        firstNameField.sendKeys(Keys.ENTER)
+        `$x`("//input[@id='pd-name']//..//div[@class='errorMsg-join']").shouldBe(hidden)
         return this
     }
 
     @Step("Fill in lastName field: {lastName}")
-    fun fillInLastNameField(firstName: String): RegistrationPage {
-        log.info("Fill in lastName field: {0}")
-        lastNameField.sendKeys(firstName)
-        `$x`("//input[@id='join-s-name']//..//div[@class='errorMsg-join']").shouldBe(Condition.hidden)
+    fun fillInLastNameField(lastName: String): RegistrationPage {
+        log.info("Fill in lastName field: $lastName")
+        lastNameField.sendKeys(lastName)
+        lastNameField.sendKeys(Keys.ENTER)
+        `$x`("//input[@id='join-s-name']//..//div[@class='errorMsg-join']").shouldBe(hidden)
         return this
     }
 
     @Step("Fill in email field: {email}")
-    fun fillInEmailField(email: String): RegistrationPage {
-        log.info("Fill in email field: {0}")
+    fun fillInEmailField(email: String, errorMessage: Condition? = hidden): RegistrationPage {
+        log.info("Fill in email field: $email")
         emailField.sendKeys(email)
-        `$x`("//input[@id='join-email']//..//div[@class='errorMsg-join']").shouldBe(Condition.hidden)
+        emailField.sendKeys(Keys.ENTER)
+        `$x`("//input[@id='join-email']//..//div[@class='errorMsg-join']").shouldBe(errorMessage)
         return this
     }
 
     @Step("Fill in password field: {password}")
-    fun fillInPasswordField(password: String): RegistrationPage {
-        log.info("Fill in lastName field: {0}")
+    fun fillInPasswordField(password: String, errorMessage: Condition? = hidden): RegistrationPage {
+        log.info("Fill in lastName field: $password")
         passwordField.sendKeys(password)
-        `$x`("//input[@id='cd-pass']//..//div[@class='errorMsg-join']").shouldBe(Condition.hidden)
+        passwordField.sendKeys(Keys.ENTER)
+        `$x`("//input[@id='cd-pass']//..//div[@class='errorMsg-join']").shouldBe(errorMessage)
         return this
     }
 

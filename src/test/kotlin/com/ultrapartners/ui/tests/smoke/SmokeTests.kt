@@ -14,8 +14,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.of
-import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.CsvFileSource
 import ui.tests.data.SMOKE
 
 
@@ -79,19 +78,20 @@ class SmokeTests : BaseTest() {
     }
 
     @Feature("Registration fields")
-    @DisplayName("[Affiliate][Registration]")
+    @DisplayName("[Affiliate][Registration][Positive]")
     @Severity(CRITICAL)
     @ParameterizedTest(name = "{displayName}, firstName: {0}, lastName: {1}, email: {2}, password: {3}")
-    @MethodSource("regPositiveFields")
+    @CsvFileSource(resources = ["/registrationFields/positive.csv"])
     fun `Registration fields positive test`(firstName: String, lastName: String, email: String, password: String) {
         `Check registration fields`(firstName, lastName, email, password)
     }
 
-    companion object {
-        @JvmStatic
-        fun regPositiveFields() = listOf(
-            of("Maxim", "Maxim", "nastusha@mail.ru", "testtest"),
-            of("Лейла", "Лейла", "pro-tected@gmail.com", "123443213")
-        )
+    @Feature("Registration fields")
+    @DisplayName("[Affiliate][Registration][Negative]")
+    @Severity(CRITICAL)
+    @ParameterizedTest(name = "{displayName}, email: {0}, password: {1}")
+    @CsvFileSource(resources = ["/registrationFields/negative.csv"])
+    fun `Registration fields negative test`(email: String, password: String) {
+        `Check registration fields - negative`(email, password)
     }
 }

@@ -18,13 +18,13 @@ class LoginPage {
 
     @Step("Fill in login field: {email}")
     fun fillInEmailField(email: String): LoginPage {
-        log.info("Fill in login field: {0}")
+        log.info("Fill in login field: $email")
         emailField.sendKeys(email)
         return this
     }
     @Step("Fill in password field: {pass}")
     fun fillInPassField(pass: String): LoginPage {
-        log.info("Fill in password field: {0}")
+        log.info("Fill in password field: $pass")
         password.sendKeys(pass)
         return this
     }

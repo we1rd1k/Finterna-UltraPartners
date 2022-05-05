@@ -4,11 +4,11 @@ import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide.`$x`
 import com.codeborne.selenide.Selenide.open
 import com.codeborne.selenide.WebDriverRunner
+import com.ultrapartners.ui.tests.Props
 import io.qameta.allure.Step
 import mu.KotlinLogging
 import org.aeonbits.owner.ConfigFactory
 import org.slf4j.Logger
-import com.ultrapartners.ui.tests.Props
 import kotlin.test.assertEquals
 
 open class BasePage {
@@ -49,6 +49,5 @@ open class BasePage {
     }
 
     fun sideMenu(section: String) = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='$section']")
-
 
 }

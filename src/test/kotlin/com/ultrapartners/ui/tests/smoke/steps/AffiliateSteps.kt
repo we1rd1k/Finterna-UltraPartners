@@ -1,5 +1,6 @@
 package com.ultrapartners.ui.tests.smoke.steps
 
+import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide.back
 import com.codeborne.selenide.WebDriverRunner
 import com.ultrapartners.ui.tests.data.SETTINGS
@@ -65,7 +66,11 @@ fun `Add payment info`(neteller: String, skrill: String, ecoPayz: String) {
         .goToBillingDetails()
         .fillInNetellerField(neteller)
         .fillInSkrillField(skrill)
-        .fillIecoPayzField(ecoPayz)
+        .fillInecoPayzField(ecoPayz)
+        .clickApplyButton()
+        .checkNetellerFieldSaved(neteller)
+        .checkSkrillFieldSaved(skrill)
+        .checkecoPayzFieldSaved(ecoPayz)
 }
 
 fun `Check registration fields`(firstName: String, lastName: String, email: String, password: String) {
@@ -76,4 +81,12 @@ fun `Check registration fields`(firstName: String, lastName: String, email: Stri
         .fillInLastNameField(lastName)
         .fillInEmailField(email)
         .fillInPasswordField(password)
+}
+
+fun `Check registration fields - negative`(email: String, password: String) {
+    RegistrationPage()
+        .openMainPage()
+        .clickJoinUsButton()
+        .fillInEmailField(email, Condition.visible)
+        .fillInPasswordField(password, Condition.visible)
 }

@@ -13,5 +13,5 @@ fun generateRndNumber(): String {
 }
 
 fun generateRndEmail(): String {
-    return randomizer().internet.email(randomizer().funnyName.toString())
+    return randomizer().internet.email(randomizer().funnyName.name())
 }
