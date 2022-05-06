@@ -17,6 +17,8 @@ open class BasePage {
     private val props = ConfigFactory.create(Props::class.java)
     internal val loginButton = `$x`("//div[@class = 'container-fluid']//button[@type = 'submit' and .='LOGIN']")
     internal val joinUsButton = `$x`("//div[@class = 'container-fluid']//button[@type = 'submit' and .='JOIN US']")
+    internal val loginPageHeader = `$x`("//h1[text()='LOGIN ULTRA PARTNERS']")
+    internal val registrationPageHeader = `$x`("//h1[text()='JOIN ULTRA PARTNERS']")
 
 
     @Step("Open app main web page")
@@ -34,7 +36,7 @@ open class BasePage {
     fun clickLoginButton(): LoginPage {
         log.info("Click login button")
         loginButton.click()
-        `$x`("//h1[text()='LOGIN ULTRA PARTNERS']").shouldBe(Condition.visible)
+        loginPageHeader.shouldBe(Condition.visible)
         assertEquals("${props.ultraPartnersUrl()}/login", WebDriverRunner.getWebDriver().currentUrl)
         return LoginPage()
     }
@@ -43,11 +45,12 @@ open class BasePage {
     fun clickJoinUsButton(): RegistrationPage {
         log.info("Click JoinUs button")
         joinUsButton.click()
-        `$x`("//h1[text()='JOIN ULTRA PARTNERS']").shouldBe(Condition.visible)
+        registrationPageHeader.shouldBe(Condition.visible)
         assertEquals("${props.ultraPartnersUrl()}/join", WebDriverRunner.getWebDriver().currentUrl)
         return RegistrationPage()
     }
 
+    @Step("Choose section of side menu: {section}")
     fun sideMenu(section: String) = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='$section']")
 
 }
