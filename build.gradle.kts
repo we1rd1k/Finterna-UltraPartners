@@ -19,11 +19,20 @@ val logbackVersion = "1.2.3"
 val selenideVersion = "6.4.0"
 val aeonbitsVersion = "1.0.12"
 val junitVersion = "5.8.2"
+val fuelVersion = "2.3.1"
+val reflectVersion = "1.4.32"
+val generaxVersion = "1.0.2"
+val jsonPathVersion = "2.0.0"
+val jsoupVersion = "1.14.3"
+val csvVersion = "1.9.0"
+val jacksonVersion = "2.13.0"
+val awaitilityVersion = "4.1.0"
+
 
 dependencies {
     testImplementation(kotlin("test"))
-    testImplementation(platform("org.junit:junit-bom:$junitVersion"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation(platform("org.junit:junit-bom:$junitVersion"))
+    implementation("org.junit.jupiter:junit-jupiter")
     implementation("com.codeborne:selenide:$selenideVersion")
     implementation("org.aeonbits.owner:owner:$aeonbitsVersion")
     implementation("io.github.microutils:kotlin-logging:1.12.5")
@@ -33,6 +42,18 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("io.github.serpro69:kotlin-faker:1.8.0")
     implementation("com.github.javafaker:javafaker:1.0.2")
+    implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+    implementation("com.github.kittinunf.fuel:fuel:$fuelVersion")
+    implementation("com.github.kittinunf.fuel:fuel-jackson:$fuelVersion")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$reflectVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+    implementation("org.awaitility:awaitility-kotlin:$awaitilityVersion")
+    implementation("com.github.mifmif:generex:$generaxVersion")
+    implementation("com.nfeld.jsonpathkt:jsonpathkt:$jsonPathVersion")
+    implementation("org.jsoup:jsoup:$jsoupVersion")
+    implementation("org.apache.commons:commons-csv:$csvVersion")
+    implementation("net.pwall.json:json-kotlin-schema:0.29")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
 }
 
 allure {
