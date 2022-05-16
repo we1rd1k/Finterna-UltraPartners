@@ -1,16 +1,16 @@
-package com.ultrapartners.ui.tests.smoke.steps
+package com.ultrapartners.ui.tests.affiliate.smoke.steps
 
 import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide.back
 import com.codeborne.selenide.WebDriverRunner
 import com.ultrapartners.ui.tests.data.SETTINGS
-import com.ultrapartners.ui.tests.pages.AffiliateMainPage
-import com.ultrapartners.ui.tests.pages.BasePage
-import com.ultrapartners.ui.tests.pages.RegistrationPage
-import com.ultrapartners.ui.tests.pages.SettingsPage
+import com.ultrapartners.ui.tests.pages.*
 import io.qameta.allure.Step
 import kotlin.test.assertContains
 
+fun `Go to Page`(pageName: String) {
+    AffiliateMainPage().goToPage(pageName)
+}
 
 fun `Affiliate Login`(login: String, pass: String) {
     BasePage().openMainPage()
@@ -90,3 +90,24 @@ fun `Check registration fields - negative`(email: String, password: String) {
         .fillInEmailField(email, Condition.visible)
         .fillInPasswordField(password, Condition.visible)
 }
+
+fun `Check elements availability - dashBoard`() {
+    AffiliateMainPage()
+        .checkTimePeriodBarIsAvailable()
+        .checkRenderingFilterIsAvailable()
+        .checkPerformanceTableControlsAreAvailable()
+}
+
+fun `Check elements availability - Reports Page`() {
+    ReportsPage()
+        .weAreOnReportsPage()
+        .checkReportsBarAvailable()
+        .checkReportsMenuItemsAvailability()
+}
+
+fun `Check elements availability - Settings Page`() {
+    SettingsPage()
+        .weAreOnSettingsPage()
+        .checkSettingsPageElementsAvailability()
+}
+

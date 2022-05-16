@@ -81,3 +81,15 @@ val runSmokeTestsTask = tasks.register<Test>("runSmokeTestSet") {
         includeTags("Smoke")
     }
 }
+
+val runApiTestsTask = tasks.register<Test>("runApiTestSet") {
+    useJUnitPlatform {
+        includeTags("Api")
+    }
+}
+
+val runHealthCheckTestsTask = tasks.register<Test>("runHealthCheckTestSet") {
+    useJUnitPlatform {
+        includeTags("HealthCheck")
+    }
+}

@@ -3,6 +3,7 @@ package com.ultrapartners.ui.tests.pages
 import com.codeborne.selenide.Condition.*
 import com.codeborne.selenide.Selenide.`$`
 import com.codeborne.selenide.Selenide.`$x`
+import com.ultrapartners.ui.tests.utils.clickable
 import io.qameta.allure.Step
 import mu.KotlinLogging
 import org.openqa.selenium.By
@@ -14,7 +15,10 @@ class SettingsPage : BasePage() {
 
     private val personalDetails = `$x`("//ul[@class='navbar-int-settings']//li[text()='Personal Details']")
     private val billingDetails = `$x`("//ul[@class='navbar-int-settings']//li[text()='Billing Details']")
+    private val contactInformation = `$x`("//ul[@class='navbar-int-settings']//li[text()='Contact information']")
+    private val preferences = `$x`("//ul[@class='navbar-int-settings']//li[text()='Preferences']")
     private val changePasswordButton = `$x`("//div[contains(@class, 'sidebar-right')]//section//p[@id='cng-pswd']")
+    private val manageApiToken = `$x`("//div[contains(@class, 'sidebar-right')]//section//p[@id='cng-pswd']")
     private val changePasswordMenu =
         `$x`("//div[contains(@class, 'ui-dialog-titlebar')]//span[text()='Change your password']")
     private val currentPasswordField = `$`(By.name("ChangePasswordForm[pass]"))
@@ -143,4 +147,13 @@ class SettingsPage : BasePage() {
         return this
     }
 
+    fun checkSettingsPageElementsAvailability(): SettingsPage {
+        personalDetails.shouldBe(clickable)
+        billingDetails.shouldBe(clickable)
+        contactInformation.shouldBe(clickable)
+        preferences.shouldBe(clickable)
+        changePasswordButton.shouldBe(clickable)
+        manageApiToken.shouldBe(clickable)
+        return this
+    }
 }

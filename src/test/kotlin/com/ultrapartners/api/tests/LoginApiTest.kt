@@ -11,13 +11,27 @@ import com.ultrapartners.api.tests.models.LoginResponse
 import com.ultrapartners.api.tests.models.LoginStatusResponse
 import com.ultrapartners.api.tests.models.LogoutResponse
 import com.ultrapartners.ui.tests.Props
+import io.qameta.allure.Epic
+import io.qameta.allure.Feature
+import io.qameta.allure.Severity
+import io.qameta.allure.SeverityLevel
 import org.aeonbits.owner.ConfigFactory
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import ui.tests.data.API
 
+@Epic("Auth API")
+@Severity(SeverityLevel.CRITICAL)
+@DisplayName("Auth API Tests")
+@Tag(API)
 class LoginApiTest: BaseApiTest() {
 
     private val props = ConfigFactory.create(Props::class.java)
 
+    @Feature("Auth API")
+    @DisplayName("[API] [Authorization] API Auth tests")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     fun loginTest() {
         val tokens = login(props.login(), props.password())
