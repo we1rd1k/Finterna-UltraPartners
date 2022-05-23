@@ -39,7 +39,7 @@ class RestAssuredLoginTest {
     fun loginTest() {
         val data = given(requestSpecification)
             .body(
-                LoginRequest(props.login(), props.password())
+                LoginRequest(props.affiliateLogin(), props.password())
             )
             .`when`()
             .post(LOGIN_URL)
@@ -71,7 +71,7 @@ class RestAssuredLoginTest {
             .assertThat()
             .statusCode(SC_OK)
             .body("logged", equalTo(true))
-            .body("username", equalTo(props.login()))
+            .body("username", equalTo(props.affiliateLogin()))
 
         given(requestSpecification)
             .header("Authorization", "Bearer ${newData.token}")

@@ -34,12 +34,12 @@ class LoginApiTest: BaseApiTest() {
     @Severity(SeverityLevel.CRITICAL)
     @Test
     fun loginTest() {
-        val tokens = login(props.login(), props.password())
+        val tokens = login(props.affiliateLogin(), props.password())
             .andVerifyResponseIs(200, LoginResponse(data = ANY_STRING, token = ANY_STRING, refresh = ANY_STRING))
         val newTokens = receiveTokens(tokens.token, tokens.refresh)
             .andVerifyResponseIs(200, AuthTokenResponse(token = ANY_STRING, refresh = ANY_STRING))
         getAuthStatus(newTokens.token)
-            .andVerifyResponseIs(200, LoginStatusResponse(logged = true, username = props.login()))
+            .andVerifyResponseIs(200, LoginStatusResponse(logged = true, username = props.affiliateLogin()))
         logout(newTokens.token)
             .andVerifyResponseIs(200,  LogoutResponse(logged = false))
     }

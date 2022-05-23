@@ -22,11 +22,11 @@ class AffiliateMainPage : BasePage() {
     private val tableRenderingFilter = `$x`("//p[.='Your performence over the month']//following-sibling::button[contains(@class, 'table')]")
     private val chartRenderingFilter = `$x`("//p[.='Your performence over the month']//following-sibling::button[contains(@class, 'chart')]")
 
-    fun performanceTableControlElement(elementName: String) = `$x`("//div[@class='apexcharts-toolbar']/div[@title='$elementName']")
+    private fun performanceTableControlElement(elementName: String) = `$x`("//div[@class='apexcharts-toolbar']/div[@title='$elementName']")
 
     @Step("Check we are on affiliate main page")
     fun weAreOnAffiliateMain() {
-        sideMenu(DASHBOARD).shouldBe(visible)
+        affiliateSideMenu(DASHBOARD).shouldBe(visible)
     }
 
     @Step("Open account menu")
@@ -48,7 +48,7 @@ class AffiliateMainPage : BasePage() {
     @Step("Go to {pageName} page")
     fun goToPage(pageName: String) {
         log.info("Go to $pageName page")
-        sideMenu(pageName).click()
+        affiliateSideMenu(pageName).click()
     }
 
     fun checkTimePeriodBarIsAvailable(): AffiliateMainPage {

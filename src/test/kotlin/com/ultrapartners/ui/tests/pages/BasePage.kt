@@ -50,7 +50,9 @@ open class BasePage {
         return RegistrationPage()
     }
 
-    @Step("Choose section of side menu: {section}")
-    fun sideMenu(section: String) = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='$section']")
+    @Step("Choose section of affiliate side menu: {section}")
+    fun affiliateSideMenu(section: String) = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='$section']")
+
+
 
 }

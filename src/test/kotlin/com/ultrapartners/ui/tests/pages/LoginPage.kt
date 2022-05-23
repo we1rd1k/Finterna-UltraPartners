@@ -30,9 +30,10 @@ class LoginPage {
     }
 
     @Step("Click Log in button")
-    fun clickLoginSubmitButton(): AffiliateMainPage {
+    fun <T> clickLoginSubmitButton(pageToGo: T): T {
         log.info("Click Log in button, and wait dashboard appears")
         submitButton.click()
-        return AffiliateMainPage()
+        @Suppress("UNCHECKED_CAST")
+        return pageToGo
     }
 }

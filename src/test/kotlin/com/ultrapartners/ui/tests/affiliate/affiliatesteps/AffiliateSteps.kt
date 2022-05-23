@@ -17,7 +17,7 @@ fun `Affiliate Login`(login: String, pass: String) {
         .clickLoginButton()
         .fillInEmailField(login)
         .fillInPassField(pass)
-        .clickLoginSubmitButton()
+        .clickLoginSubmitButton(AffiliateMainPage())
         .weAreOnAffiliateMain()
 }
 
@@ -39,7 +39,7 @@ fun `Check availability of links`() {
     )
     linksNames.forEach { s ->
         run {
-            AffiliateMainPage().sideMenu(s).click()
+            AffiliateMainPage().affiliateSideMenu(s).click()
             assertContains(WebDriverRunner.getWebDriver().currentUrl, linksMap.getValue(s), ignoreCase = true)
             if (s == "Media") back()
         }

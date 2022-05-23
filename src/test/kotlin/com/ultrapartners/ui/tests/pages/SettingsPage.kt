@@ -38,7 +38,7 @@ class SettingsPage : BasePage() {
     @Step("Check we are on Settings page")
     fun weAreOnSettingsPage(): SettingsPage {
         log.info("Check we are on Settings page")
-        sideMenu("Settings").shouldBe(visible)
+        affiliateSideMenu("Settings").shouldBe(visible)
         personalDetails.shouldBe(visible)
         return this
     }
