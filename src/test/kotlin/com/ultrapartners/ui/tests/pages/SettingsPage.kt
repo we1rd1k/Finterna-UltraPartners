@@ -147,7 +147,9 @@ class SettingsPage : BasePage() {
         return this
     }
 
+    @Step("Check Settings Page Elements are available")
     fun checkSettingsPageElementsAvailability(): SettingsPage {
+        log.info("Check Settings Page Elements are available")
         personalDetails.shouldBe(clickable)
         billingDetails.shouldBe(clickable)
         contactInformation.shouldBe(clickable)
