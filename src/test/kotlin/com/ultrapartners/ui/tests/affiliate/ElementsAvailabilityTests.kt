@@ -14,7 +14,7 @@ class ElementsAvailabilityTests: BaseTest() {
 
     @Test
     fun `Availability of Affiliate Acc Elements Test`() {
-        `Affiliate Login`(props.login(), props.password())
+        `Affiliate Login`(props.affiliateLogin(), props.password())
         `Check elements availability - dashBoard`()
         `Go to Page`(REPORTS)
         `Check elements availability - Reports Page`()

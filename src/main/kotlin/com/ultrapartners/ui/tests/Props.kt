@@ -10,8 +10,11 @@ interface Props : Config {
     @Config.Key("ultraPartnersDev.url")
     fun ultraPartnersUrl(): String
 
-    @Config.Key("login")
-    fun login(): String
+    @Config.Key("affiliateLogin")
+    fun affiliateLogin(): String
+
+    @Config.Key("adminLogin")
+    fun adminLogin(): String
 
     @Config.Key("password")
     fun password(): String

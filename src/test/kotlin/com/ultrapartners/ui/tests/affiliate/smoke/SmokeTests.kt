@@ -32,7 +32,7 @@ class SmokeTests : BaseTest() {
     @Severity(CRITICAL)
     @Test
     fun `Login test`() {
-        `Affiliate Login`(props.login(), props.password())
+        `Affiliate Login`(props.affiliateLogin(), props.password())
     }
 
     @Feature("Logout")
@@ -40,7 +40,7 @@ class SmokeTests : BaseTest() {
     @Severity(CRITICAL)
     @Test
     fun `Logout test`() {
-        `Affiliate Login`(props.login(), props.password())
+        `Affiliate Login`(props.affiliateLogin(), props.password())
         `Affiliate Logout`()
     }
 
@@ -49,7 +49,7 @@ class SmokeTests : BaseTest() {
     @Severity(CRITICAL)
     @Test
     fun `Availability of sections test`() {
-        `Affiliate Login`(props.login(), props.password())
+        `Affiliate Login`(props.affiliateLogin(), props.password())
         `Check availability of links`()
     }
 
@@ -59,11 +59,11 @@ class SmokeTests : BaseTest() {
     @Test
     fun `Password change test`() {
         val testPassword = "Test123"
-        `Affiliate Login`(props.login(), props.password())
+        `Affiliate Login`(props.affiliateLogin(), props.password())
         `Change password`(props.password(), testPassword)
         `Affiliate Logout`()
         //Login with new password
-        `Affiliate Login`(props.login(), testPassword)
+        `Affiliate Login`(props.affiliateLogin(), testPassword)
         //Change password back to default
         `Change password`(testPassword, props.password())
     }
@@ -73,7 +73,7 @@ class SmokeTests : BaseTest() {
     @Severity(CRITICAL)
     @Test
     fun `Adding payment details test`() {
-        `Affiliate Login`(props.login(), props.password())
+        `Affiliate Login`(props.affiliateLogin(), props.password())
         `Add payment info`(neteller = generateRndEmail(), skrill = generateRndEmail(), ecoPayz = generateRndNumber())
     }
 
