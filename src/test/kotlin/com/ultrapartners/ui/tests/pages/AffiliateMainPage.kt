@@ -51,18 +51,24 @@ class AffiliateMainPage : BasePage() {
         affiliateSideMenu(pageName).click()
     }
 
+    @Step("Check Time period bar is available")
     fun checkTimePeriodBarIsAvailable(): AffiliateMainPage {
+        log.info("Check Time period bar is available")
         timePeriodBarItemsList.forEach { it.shouldBe(clickable) }
         return this
     }
 
+    @Step("Check Rendering Filter is available")
     fun checkRenderingFilterIsAvailable(): AffiliateMainPage {
+        log.info("Check Rendering Filter is available")
         tableRenderingFilter.shouldBe(clickable)
         chartRenderingFilter.shouldBe(clickable)
         return this
     }
 
+    @Step("Check Performance Table Controls are available")
     fun checkPerformanceTableControlsAreAvailable(): AffiliateMainPage {
+        log.info("Check Performance Table Controls are available")
         performanceTableControlElement("Zoom In").shouldBe(clickable)
         performanceTableControlElement("Zoom Out").shouldBe(clickable)
         performanceTableControlElement("Selection Zoom").shouldBe(clickable)
