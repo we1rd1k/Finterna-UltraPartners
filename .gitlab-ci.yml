@@ -8,7 +8,7 @@ cache:
   key:
     files:
       - build.gradle
-  path:
+  paths:
     - .gradle-cache
 
 variables:
