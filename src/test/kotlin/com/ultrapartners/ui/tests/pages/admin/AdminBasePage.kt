@@ -1,7 +1,8 @@
-package com.ultrapartners.ui.tests.pages
+package com.ultrapartners.ui.tests.pages.admin
 
 import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selenide.`$x`
+import com.ultrapartners.ui.tests.pages.BasePage
 import io.qameta.allure.Step
 import mu.KotlinLogging
 import org.slf4j.Logger

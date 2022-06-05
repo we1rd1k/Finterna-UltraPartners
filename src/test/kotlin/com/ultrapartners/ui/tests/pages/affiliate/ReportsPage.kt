@@ -1,8 +1,9 @@
-package com.ultrapartners.ui.tests.pages
+package com.ultrapartners.ui.tests.pages.affiliate
 
 import com.codeborne.selenide.CollectionCondition
 import com.codeborne.selenide.Selenide.`$$x`
 import com.codeborne.selenide.Selenide.`$x`
+import com.ultrapartners.ui.tests.pages.BasePage
 import com.ultrapartners.ui.tests.utils.clickable
 import io.qameta.allure.Step
 import mu.KotlinLogging

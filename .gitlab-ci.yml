@@ -1,0 +1,26 @@
+image: gradle:latest
+
+stages:
+  - test
+  - deploy
+
+cache:
+  key:
+    files:
+      - build.gradle
+  path:
+    - .gradle-cache
+
+test:
+  stage: test
+  script:
+    - ./gradlew clean test -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456"
+
+deploy:
+  stage: deploy
+  script:
+    - ./gradlew allureServe
+  artifacts:
+    when: always
+    paths:
+      - /allure-report

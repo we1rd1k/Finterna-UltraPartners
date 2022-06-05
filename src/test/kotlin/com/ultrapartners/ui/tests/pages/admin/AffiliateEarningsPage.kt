@@ -1,8 +1,9 @@
-package com.ultrapartners.ui.tests.pages
+package com.ultrapartners.ui.tests.pages.admin
 
 import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selenide.`$`
 import com.codeborne.selenide.Selenide.`$x`
+import com.ultrapartners.ui.tests.pages.BasePage
 import io.qameta.allure.Step
 import mu.KotlinLogging
 import org.openqa.selenium.By
@@ -49,7 +50,7 @@ class AffiliateEarningsPage: BasePage() {
     @Step("Fill in affiliateId field with value: {value}")
     fun fillInAffiliateIdField(value: String): AffiliateEarningsPage {
         log.info("Fill in affiliateId field with value: $value")
-        affiliateIdField.value = value
+        affiliateIdField.setValue(value)
         return this
     }
 
@@ -70,14 +71,14 @@ class AffiliateEarningsPage: BasePage() {
     @Step("Fill in Amount field with value: {value}")
     fun fillInAmountField(value: String): AffiliateEarningsPage {
         log.info("Fill in Amount field with value: $value")
-        amountField.value = value
+        amountField.setValue(value)
         return this
     }
 
     @Step("Fill in Comment field with value: {value}")
     fun fillInCommentField(value: String): AffiliateEarningsPage {
         log.info("Fill in Comment field with value: $value")
-        commentField.value = value
+        commentField.setValue(value)
         return this
     }
 

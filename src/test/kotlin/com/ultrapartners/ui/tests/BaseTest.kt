@@ -24,8 +24,8 @@ open class BaseTest {
                 .savePageSource(true)
         )
         val capabilities = DesiredCapabilities()
-        capabilities.setCapability("browserName", "chrome")
-        capabilities.setCapability("browserVersion", "89.0")
+//        capabilities.setCapability("browserName", "chrome")
+//        capabilities.setCapability("browserVersion", "89.0")
         capabilities.setCapability("chrome.switches", listOf("--ignore-certificate-errors"))
         val value: MutableMap<String, Any> = HashMap()
         value["enableVNC"] = true
