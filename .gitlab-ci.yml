@@ -4,15 +4,15 @@ stages:
   - test
   - deploy
 
-#cache:
-#  key:
-#    files:
-#      - build.gradle
-#  paths:
-#    - .gradle-cache
+cache:
+  key:
+    files:
+      - build.gradle.kts
+  paths:
+    - .gradle
 
 variables:
-  GRADLE_USER_HOME: '.gradle-cache'
+  GRADLE_USER_HOME: '.gradle'
 
 test:
   stage: test
