@@ -4,9 +4,9 @@ stages:
   - test
   - deploy
 
-before_script:
-  - apt-get -y install google-chrome-stable=102.0.5005.63
-
+services:
+  - name: aerokube/selenoid
+  - name: selenoid/chrome:100.0
 
 cache:
   key:
@@ -21,7 +21,7 @@ variables:
 test:
   stage: test
   script:
-    - ./gradlew clean runCITests -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456"
+    - ./gradlew clean runCITests -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456" -DselenoidUrl="http://0.0.0.0:4444/wd/hub"
 
 deploy:
   stage: deploy

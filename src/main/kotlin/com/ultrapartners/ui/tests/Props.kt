@@ -15,4 +15,6 @@ interface Props : Config {
     fun adminLogin(): String
 
     fun password(): String
+
+    fun selenoidUrl(): String
 }
