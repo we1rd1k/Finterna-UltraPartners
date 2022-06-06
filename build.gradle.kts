@@ -101,6 +101,15 @@ val runCITestsTask = tasks.register<Test>("runCITests") {
     useJUnitPlatform {
         includeTags("CI")
     }
+    testLogging {
+        events = mutableSetOf(org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStackTraces = true
+        showExceptions =true
+        showCauses = true
+    }
     systemProperties(
         "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
         "affiliateLogin" to System.getProperty("affiliateLogin"),
