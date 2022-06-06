@@ -20,8 +20,6 @@ variables:
 
 test:
   stage: test
-  tags:
-    - docker
   script:
     - ./gradlew clean runCITests -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456"
 
