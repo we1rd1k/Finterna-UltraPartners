@@ -4,6 +4,10 @@ stages:
   - test
   - deploy
 
+before_script:
+  - apt-get -y install google-chrome-stable=102.0.5005.63
+
+
 cache:
   key:
     files:
@@ -16,6 +20,8 @@ variables:
 
 test:
   stage: test
+  tags:
+    - docker
   script:
     - ./gradlew clean runCITests -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456"
 
