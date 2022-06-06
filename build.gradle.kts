@@ -113,5 +113,6 @@ val runCITestsTask = tasks.register<Test>("runCITests") {
     systemProperties(
         "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
         "affiliateLogin" to System.getProperty("affiliateLogin"),
-        "password" to System.getProperty("password"))
+        "password" to System.getProperty("password"),
+        "solenoidUrl" to System.getProperty("solenoidUrl"))
 }
