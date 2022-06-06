@@ -17,7 +17,7 @@ variables:
 test:
   stage: test
   script:
-    - ./gradlew clean test -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456"
+    - ./gradlew clean runCITests -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456"
 
 deploy:
   stage: deploy

@@ -15,9 +15,10 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvFileSource
+import ui.tests.data.CI
 import ui.tests.data.SMOKE
 
-
+@Tag(CI)
 @Tag(SMOKE)
 @Epic("Affiliate Smoke")
 @Severity(CRITICAL)

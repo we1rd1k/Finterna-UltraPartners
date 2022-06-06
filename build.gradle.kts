@@ -67,11 +67,8 @@ allure {
 
 
 tasks.test {
-    useJUnitPlatform()
-    systemProperties(
-        "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
-        "affiliateLogin" to System.getProperty("affiliateLogin"),
-        "password" to System.getProperty("password"))
+    useJUnitPlatform ()
+
 }
 
 tasks.withType<KotlinCompile> {
@@ -86,10 +83,6 @@ val runSmokeTestsTask = tasks.register<Test>("runSmokeTestSet") {
     useJUnitPlatform {
         includeTags("Smoke")
     }
-    systemProperties(
-        "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
-        "affiliateLogin" to System.getProperty("affiliateLogin"),
-        "password" to System.getProperty("password"))
 }
 
 val runApiTestsTask = tasks.register<Test>("runApiTestSet") {
@@ -102,4 +95,14 @@ val runHealthCheckTestsTask = tasks.register<Test>("runHealthCheckTestSet") {
     useJUnitPlatform {
         includeTags("HealthCheck")
     }
+}
+
+val runCITestsTask = tasks.register<Test>("runCITests") {
+    useJUnitPlatform {
+        includeTags("CI")
+    }
+    systemProperties(
+        "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
+        "affiliateLogin" to System.getProperty("affiliateLogin"),
+        "password" to System.getProperty("password"))
 }
