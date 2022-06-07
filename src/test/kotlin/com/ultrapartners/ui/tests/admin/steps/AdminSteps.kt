@@ -1,7 +1,7 @@
 package com.ultrapartners.ui.tests.admin.steps
 
-import com.ultrapartners.ui.tests.pages.AdminBasePage
-import com.ultrapartners.ui.tests.pages.AffiliateEarningsPage
+import com.ultrapartners.ui.tests.pages.admin.AdminBasePage
+import com.ultrapartners.ui.tests.pages.admin.AffiliateEarningsPage
 import com.ultrapartners.ui.tests.pages.BasePage
 
 fun `Admin Login`(login: String, pass: String) {

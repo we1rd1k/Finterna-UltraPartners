@@ -16,7 +16,7 @@ repositories {
 
 val allureVersion = "2.17.2"
 val logbackVersion = "1.2.3"
-val selenideVersion = "6.4.0"
+val selenideVersion = "6.5.1"
 val aeonbitsVersion = "1.0.12"
 val junitVersion = "5.8.2"
 val fuelVersion = "2.3.1"
@@ -60,12 +60,15 @@ dependencies {
     testImplementation ("io.rest-assured:kotlin-extensions:5.0.1")
     implementation("io.qameta.allure:allure-rest-assured:2.17.3")
 }
+
 allure {
     version.set(allureVersion)
 }
 
+
 tasks.test {
-    useJUnitPlatform()
+    useJUnitPlatform ()
+
 }
 
 tasks.withType<KotlinCompile> {
@@ -92,4 +95,24 @@ val runHealthCheckTestsTask = tasks.register<Test>("runHealthCheckTestSet") {
     useJUnitPlatform {
         includeTags("HealthCheck")
     }
+}
+
+val runCITestsTask = tasks.register<Test>("runCITests") {
+    useJUnitPlatform {
+        includeTags("CI")
+    }
+    testLogging {
+        events = mutableSetOf(org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStackTraces = true
+        showExceptions =true
+        showCauses = true
+    }
+    systemProperties(
+        "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
+        "affiliateLogin" to System.getProperty("affiliateLogin"),
+        "password" to System.getProperty("password"),
+        "solenoidUrl" to System.getProperty("solenoidUrl"))
 }

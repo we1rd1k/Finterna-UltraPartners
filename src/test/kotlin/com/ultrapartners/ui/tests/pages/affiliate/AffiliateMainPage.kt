@@ -1,11 +1,15 @@
-package com.ultrapartners.ui.tests.pages
+package com.ultrapartners.ui.tests.pages.affiliate
 
 import com.codeborne.selenide.Condition.visible
 import com.codeborne.selenide.Selenide.`$$x`
 import com.codeborne.selenide.Selenide.`$x`
 import com.ultrapartners.ui.tests.data.DASHBOARD
+import com.ultrapartners.ui.tests.pages.BasePage
 import com.ultrapartners.ui.tests.utils.clickable
+import com.ultrapartners.ui.tests.utils.waitForJStoLoad
 import io.qameta.allure.Step
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import org.slf4j.Logger
 
@@ -32,7 +36,9 @@ class AffiliateMainPage : BasePage() {
     @Step("Open account menu")
     fun openAffiliateProfileDropDownList(): AffiliateMainPage {
         log.info("Open account menu")
-        affiliateProfileButton.click()
+        waitForJStoLoad
+        runBlocking { delay(3000) }
+        affiliateProfileButton.shouldBe(clickable).click()
         dropDownMenu.shouldBe(visible)
         return this
     }
@@ -48,6 +54,8 @@ class AffiliateMainPage : BasePage() {
     @Step("Go to {pageName} page")
     fun goToPage(pageName: String) {
         log.info("Go to $pageName page")
+        waitForJStoLoad
+        runBlocking { delay(2000) }
         affiliateSideMenu(pageName).click()
     }
 

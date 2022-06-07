@@ -1,10 +1,14 @@
-package com.ultrapartners.ui.tests.pages
+package com.ultrapartners.ui.tests.pages.affiliate
 
 import com.codeborne.selenide.Condition.*
 import com.codeborne.selenide.Selenide.`$`
 import com.codeborne.selenide.Selenide.`$x`
+import com.ultrapartners.ui.tests.pages.BasePage
 import com.ultrapartners.ui.tests.utils.clickable
+import com.ultrapartners.ui.tests.utils.waitForJStoLoad
 import io.qameta.allure.Step
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import org.openqa.selenium.By
 import org.slf4j.Logger
@@ -38,6 +42,7 @@ class SettingsPage : BasePage() {
     @Step("Check we are on Settings page")
     fun weAreOnSettingsPage(): SettingsPage {
         log.info("Check we are on Settings page")
+        waitForJStoLoad
         affiliateSideMenu("Settings").shouldBe(visible)
         personalDetails.shouldBe(visible)
         return this
@@ -46,6 +51,8 @@ class SettingsPage : BasePage() {
     @Step("Go to change password menu")
     fun goToChangePasswordMenu(): SettingsPage {
         log.info("Go to change password menu")
+        waitForJStoLoad
+        runBlocking { delay(3000) }
         changePasswordButton.click()
         changePasswordMenu.shouldBe(visible)
         return this
@@ -90,6 +97,8 @@ class SettingsPage : BasePage() {
     @Step("Go to billing details form")
     fun goToBillingDetails(): SettingsPage {
         log.info("Go to billing details form")
+        waitForJStoLoad
+        runBlocking { delay(2000) }
         billingDetails.click()
         billingDetails.shouldHave(attributeMatching("class", ".*active.*"))
         return this

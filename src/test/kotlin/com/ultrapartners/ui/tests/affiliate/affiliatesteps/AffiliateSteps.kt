@@ -4,8 +4,17 @@ import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide.back
 import com.codeborne.selenide.WebDriverRunner
 import com.ultrapartners.ui.tests.data.SETTINGS
-import com.ultrapartners.ui.tests.pages.*
+import com.ultrapartners.ui.tests.pages.BasePage
+import com.ultrapartners.ui.tests.pages.RegistrationPage
+import com.ultrapartners.ui.tests.pages.affiliate.AffiliateMainPage
+import com.ultrapartners.ui.tests.pages.affiliate.ReportsPage
+import com.ultrapartners.ui.tests.pages.affiliate.SettingsPage
+import com.ultrapartners.ui.tests.utils.waitForJStoLoad
 import io.qameta.allure.Step
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import org.awaitility.Awaitility
+import java.time.Duration
 import kotlin.test.assertContains
 
 fun `Go to Page`(pageName: String) {
@@ -38,9 +47,12 @@ fun `Check availability of links`() {
         "Support" to "/affiliate/support"
     )
     linksNames.forEach { s ->
-        run {
+        runBlocking {
+            waitForJStoLoad
+            delay(3000)
             AffiliateMainPage().affiliateSideMenu(s).click()
-            assertContains(WebDriverRunner.getWebDriver().currentUrl, linksMap.getValue(s), ignoreCase = true)
+            val url = WebDriverRunner.getWebDriver().currentUrl
+            Awaitility.await().atMost(Duration.ofMillis(5000)).untilAsserted { (assertContains(url, linksMap.getValue(s), ignoreCase = true)) }
             if (s == "Media") back()
         }
     }
