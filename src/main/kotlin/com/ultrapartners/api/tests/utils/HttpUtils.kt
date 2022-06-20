@@ -19,7 +19,13 @@ val log: Logger = KotlinLogging.logger { }
 private val props = ConfigFactory.create(Props::class.java)
 
 
-fun signedPost(path: String, request: Any?, token: String, vararg headers: Pair<String, String>) =
+fun signedPost(
+    path: String,
+    request: Any?,
+    token: String,
+    vararg headers: Pair<String, String>,
+    parameters: List<Pair<String, String>>? = null
+) =
     post(
         path,
         request,
@@ -27,7 +33,8 @@ fun signedPost(path: String, request: Any?, token: String, vararg headers: Pair<
             "Content-Type" to "application/json",
             "Authorization" to "Bearer $token",
             *headers
-        )
+        ),
+        parameters = parameters
     )
 
 fun signedGet(path: String, token: String) =
@@ -121,7 +128,7 @@ inline fun <reified T> sendRequest(
                         Fuel.upload(url, Method.POST, parameters)
                             .allowRedirects(allowRedirects)
                     } else {
-                        Fuel.post(url).allowRedirects(allowRedirects)
+                        Fuel.post(url, parameters).allowRedirects(allowRedirects)
                     }
                 }
 
