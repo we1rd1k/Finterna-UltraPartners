@@ -4,30 +4,30 @@ stages:
   - test
   - deploy
 
-services:
-  - name: aerokube/selenoid
-  - name: selenoid/chrome:100.0
-
-cache:
-  key:
-    files:
-      - build.gradle.kts
-  paths:
-    - .gradle
-
-variables:
-  GRADLE_USER_HOME: '.gradle'
-
-test:
-  stage: test
-  script:
-    - ./gradlew clean runCITests -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456" -DselenoidUrl="http://127.0.0.1:4444/wd/hub"
-
-deploy:
-  stage: deploy
-  script:
-    - ./gradlew allureServe
-  artifacts:
-    when: always
-    paths:
-      - /allure-report
+#services:
+#  - name: aerokube/selenoid
+#  - name: selenoid/chrome:100.0
+#
+#cache:
+#  key:
+#    files:
+#      - build.gradle.kts
+#  paths:
+#    - .gradle
+#
+#variables:
+#  GRADLE_USER_HOME: '.gradle'
+#
+#test:
+#  stage: test
+#  script:
+#    - ./gradlew clean runCITests -DultraPartnersUrl="https://ultrapartners.com" -DaffiliateLogin="kirillb@gmail.com" -Dpassword="123456" -DselenoidUrl="http://127.0.0.1:4444/wd/hub"
+#
+#deploy:
+#  stage: deploy
+#  script:
+#    - ./gradlew allureServe
+#  artifacts:
+#    when: always
+#    paths:
+#      - /allure-report

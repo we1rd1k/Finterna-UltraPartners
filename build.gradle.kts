@@ -59,6 +59,8 @@ dependencies {
     testImplementation ("io.rest-assured:json-schema-validator:5.0.1")
     testImplementation ("io.rest-assured:kotlin-extensions:5.0.1")
     implementation("io.qameta.allure:allure-rest-assured:2.17.3")
+    testImplementation("org.assertj:assertj-core:3.6.1")
+
 }
 
 allure {
@@ -68,8 +70,22 @@ allure {
 
 tasks.test {
     useJUnitPlatform ()
+    testLogging {
+        events = mutableSetOf(org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
 
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStackTraces = true
+        showExceptions =true
+        showCauses = true
+    }
+    systemProperties(
+        "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
+        "affiliateLogin" to System.getProperty("affiliateLogin"),
+        "password" to System.getProperty("password"),
+        "solenoidUrl" to System.getProperty("solenoidUrl"))
 }
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
@@ -83,6 +99,20 @@ val runSmokeTestsTask = tasks.register<Test>("runSmokeTestSet") {
     useJUnitPlatform {
         includeTags("Smoke")
     }
+    testLogging {
+        events = mutableSetOf(org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStackTraces = true
+        showExceptions =true
+        showCauses = true
+    }
+    systemProperties(
+        "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
+        "affiliateLogin" to System.getProperty("affiliateLogin"),
+        "password" to System.getProperty("password"),
+        "solenoidUrl" to System.getProperty("solenoidUrl"))
 }
 
 val runApiTestsTask = tasks.register<Test>("runApiTestSet") {
@@ -95,6 +125,26 @@ val runHealthCheckTestsTask = tasks.register<Test>("runHealthCheckTestSet") {
     useJUnitPlatform {
         includeTags("HealthCheck")
     }
+}
+
+val runRegressTestsTask = tasks.register<Test>("runRegressTestsSet") {
+    useJUnitPlatform {
+        includeTags("Regress")
+    }
+    testLogging {
+        events = mutableSetOf(org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED)
+
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStackTraces = true
+        showExceptions =true
+        showCauses = true
+    }
+    systemProperties(
+        "ultraPartnersUrl" to System.getProperty("ultraPartnersUrl"),
+        "affiliateLogin" to System.getProperty("affiliateLogin"),
+        "password" to System.getProperty("password"),
+        "solenoidUrl" to System.getProperty("solenoidUrl"))
 }
 
 val runCITestsTask = tasks.register<Test>("runCITests") {

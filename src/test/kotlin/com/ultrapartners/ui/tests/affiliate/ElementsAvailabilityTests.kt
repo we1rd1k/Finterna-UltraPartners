@@ -2,7 +2,7 @@ package com.ultrapartners.ui.tests.affiliate
 
 import com.ultrapartners.ui.tests.BaseTest
 import com.ultrapartners.ui.tests.Props
-import com.ultrapartners.ui.tests.affiliate.smoke.steps.*
+import com.ultrapartners.ui.tests.affiliate.affiliatesteps.*
 import com.ultrapartners.ui.tests.data.REPORTS
 import com.ultrapartners.ui.tests.data.SETTINGS
 import io.qameta.allure.Epic
@@ -19,7 +19,7 @@ import ui.tests.data.SMOKE
 @Epic("Elements Availability")
 @Severity(SeverityLevel.CRITICAL)
 @DisplayName("Elements Availability Tests")
-class ElementsAvailabilityTests: BaseTest() {
+class ElementsAvailabilityTests : BaseTest() {
 
     private val props = ConfigFactory.create(Props::class.java)
 

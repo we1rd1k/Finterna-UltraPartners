@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config.LoadPolicy
 import org.aeonbits.owner.Config.Sources
 
 @LoadPolicy(Config.LoadType.MERGE)
-@Sources("system:properties", "system:env", "file:src/main/resources/config.properties")
+@Sources("file:src/main/resources/config.properties", "system:env", "system:properties")
 interface Props : Config {
 
     fun ultraPartnersUrl(): String
