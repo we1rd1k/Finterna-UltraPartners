@@ -1,4 +1,4 @@
-package com.ultrapartners.ui.tests.affiliate.smoke.steps
+package com.ultrapartners.ui.tests.affiliate.affiliatesteps
 
 import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide.back
@@ -52,7 +52,8 @@ fun `Check availability of links`() {
             delay(3000)
             AffiliateMainPage().affiliateSideMenu(s).click()
             val url = WebDriverRunner.getWebDriver().currentUrl
-            Awaitility.await().atMost(Duration.ofMillis(5000)).untilAsserted { (assertContains(url, linksMap.getValue(s), ignoreCase = true)) }
+            Awaitility.await().atMost(Duration.ofMillis(5000))
+                .untilAsserted { (assertContains(url, linksMap.getValue(s), ignoreCase = true)) }
             if (s == "Media") back()
         }
     }

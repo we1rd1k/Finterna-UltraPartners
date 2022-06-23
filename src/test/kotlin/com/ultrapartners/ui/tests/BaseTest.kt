@@ -46,11 +46,14 @@ open class BaseTest {
         Configuration.browser = "chrome"
         Configuration.timeout = 10000
         Configuration.browserSize = "1366x768"
+        Selenide.clipboard().text = ""
 //        Configuration.headless = true
     }
 
     @AfterEach
     fun afterTest() {
+        Selenide.clearBrowserCookies()
+        Selenide.clearBrowserLocalStorage()
         Selenide.closeWebDriver()
     }
 }

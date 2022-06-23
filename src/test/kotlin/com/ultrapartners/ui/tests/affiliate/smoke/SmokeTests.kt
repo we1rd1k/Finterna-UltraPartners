@@ -2,7 +2,7 @@ package com.ultrapartners.ui.tests.affiliate.smoke
 
 import com.ultrapartners.ui.tests.BaseTest
 import com.ultrapartners.ui.tests.Props
-import com.ultrapartners.ui.tests.affiliate.smoke.steps.*
+import com.ultrapartners.ui.tests.affiliate.affiliatesteps.*
 import com.ultrapartners.ui.tests.utils.generateRndEmail
 import com.ultrapartners.ui.tests.utils.generateRndNumber
 import io.qameta.allure.Epic
