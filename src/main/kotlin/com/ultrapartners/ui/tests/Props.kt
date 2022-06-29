@@ -17,4 +17,8 @@ interface Props : Config {
     fun password(): String
 
     fun selenoidUrl(): String
+
+    fun ultraPartnersApiLogin(): String
+
+    fun ultraPartnersApiPassword(): String
 }

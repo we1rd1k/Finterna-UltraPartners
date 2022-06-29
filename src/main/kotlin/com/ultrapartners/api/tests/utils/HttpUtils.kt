@@ -149,7 +149,7 @@ inline fun <reified T> sendRequest(
         RequestType.OPTIONS -> Fuel.request(Method.OPTIONS, url).allowRedirects(allowRedirects)
     }
 
-    val (_, response, _) = request.header(headers).timeoutRead(50000).response()
+    val (_, response, _) = request.header(headers).timeoutRead(80000).response()
 
     val responseBody = when (T::class) {
         String::class -> response.body()
