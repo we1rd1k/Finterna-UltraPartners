@@ -3,6 +3,7 @@ package com.ultrapartners.api.tests.assertions
 import com.ultrapartners.api.tests.models.HttpResponse
 import com.ultrapartners.api.tests.utils.deepCopy
 import com.ultrapartners.api.tests.utils.fromJson
+import com.ultrapartners.api.tests.utils.fromJsonToList
 import io.qameta.allure.Step
 import mu.KotlinLogging
 import net.pwall.json.schema.JSONSchema
@@ -26,6 +27,34 @@ fun <T : Any?> HttpResponse<String>.andVerifyResponseIs(code: Any?, expectedResp
         } else {
             actualResponse = this.body
             expected = expectedResponse
+        }
+
+        assertEquals(expected, actualResponse)
+    } catch (assertionError: AssertionError) {
+        log.warn("Assertion failed for response with code ${this.code}\nand body: ${this.body}")
+        throw assertionError
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    return actualResponse as T
+}
+
+@Step("Verify list response")
+fun <T : Any?> HttpResponse<String>.andVerifyListResponseIs(code: Any?, expectedResponse: T): T {
+    val actualResponse: Any
+    try {
+        assertEquals(this.code, code)
+        val expected = mutableListOf<Any>()
+        if (expectedResponse !is String) {
+            actualResponse = this.body.fromJsonToList(expectedResponse!!::class.java)
+            for (i in actualResponse.indices) {
+                expected.add(processRegexp(expectedResponse, actualResponse[i]))
+            }
+        } else {
+            actualResponse = this.body
+            for (i in actualResponse.indices) {
+                expected.add(expectedResponse[i])
+            }
         }
 
         assertEquals(expected, actualResponse)
