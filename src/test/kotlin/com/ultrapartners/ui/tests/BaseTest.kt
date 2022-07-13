@@ -8,6 +8,7 @@ import io.qameta.allure.selenide.AllureSelenide
 import mu.KotlinLogging
 import org.aeonbits.owner.ConfigFactory
 import org.apache.commons.lang3.StringUtils
+import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
@@ -52,8 +53,12 @@ open class BaseTest {
 
     @AfterEach
     fun afterTest() {
+        Selenide.closeWebDriver()
+    }
+
+    @AfterAll
+    fun tearDown() {
         Selenide.clearBrowserCookies()
         Selenide.clearBrowserLocalStorage()
-        Selenide.closeWebDriver()
     }
 }

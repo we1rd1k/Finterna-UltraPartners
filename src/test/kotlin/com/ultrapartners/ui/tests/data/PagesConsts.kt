@@ -1,5 +1,7 @@
 package com.ultrapartners.ui.tests.data
 
+import org.openqa.selenium.Cookie
+
 //Side Menu
 const val DASHBOARD = "Dashboard"
 const val SETTINGS = "Settings"
@@ -34,9 +36,9 @@ data class Brand(var name: String, var url: String)
 data class Language(var langName: String, var langUrl: String)
 
 enum class Brands(val getBrand: Brand) {
-    UNIQUE_CASINO(Brand("Unique Casino", "winuniquecasino")),
-    MA_CHANCE(Brand("MaChance","winmachancecasino")),
-    VEGAS_PLUS(Brand("VegasPlus","vegasplus"))
+    UNIQUE_CASINO(Brand("Unique Casino", "winunique")),
+    MA_CHANCE(Brand("MaChance", "winmachance")),
+    VEGAS_PLUS(Brand("VegasPlus", "vegasplus"))
 }
 
 enum class Languages(val getLanguage: Language) {
@@ -52,3 +54,4 @@ enum class Languages(val getLanguage: Language) {
 }
 
 lateinit var dataId: String
+var cookies: Set<Cookie> = mutableSetOf()
