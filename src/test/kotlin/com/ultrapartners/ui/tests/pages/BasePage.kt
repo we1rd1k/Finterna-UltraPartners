@@ -5,7 +5,10 @@ import com.codeborne.selenide.Selenide.`$x`
 import com.codeborne.selenide.Selenide.open
 import com.codeborne.selenide.WebDriverRunner
 import com.ultrapartners.ui.tests.Props
+import com.ultrapartners.ui.tests.data.cookies
 import io.qameta.allure.Step
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import org.aeonbits.owner.ConfigFactory
 import org.slf4j.Logger
@@ -23,13 +26,24 @@ open class BasePage {
 
     @Step("Open app main web page")
     fun openMainPage(): BasePage {
-        log.info("Open web page ${props.ultraPartnersUrl()}")
-        open(props.ultraPartnersUrl())
-        loginButton.shouldBe(Condition.visible)
-            .shouldBe(
-                Condition.enabled
-            )
-        return this
+        return if (cookies.isEmpty()) {
+            log.info("Open web page ${props.ultraPartnersUrl()}")
+            open(props.ultraPartnersUrl())
+            loginButton.shouldBe(Condition.visible)
+                .shouldBe(
+                    Condition.enabled
+                )
+            this
+        } else {
+            log.info("Open web page ${props.ultraPartnersUrl()} with cookies")
+            open(props.ultraPartnersUrl())
+            WebDriverRunner.getWebDriver().manage().deleteAllCookies()
+            WebDriverRunner.getWebDriver().manage()
+                .addCookie(cookies.find { cookie -> cookie.name.equals("PHPSESSID") })
+            runBlocking { delay(3000) }
+            WebDriverRunner.getWebDriver().navigate().refresh()
+            this
+        }
     }
 
     @Step("Click login button")
@@ -52,7 +66,6 @@ open class BasePage {
 
     @Step("Choose section of affiliate side menu: {section}")
     fun affiliateSideMenu(section: String) = `$x`("//nav[contains(@class, 'sidebar-left')]//span[text()='$section']")
-
 
 
 }

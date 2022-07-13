@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition
 import com.codeborne.selenide.Selenide.back
 import com.codeborne.selenide.WebDriverRunner
 import com.ultrapartners.ui.tests.data.SETTINGS
+import com.ultrapartners.ui.tests.data.cookies
 import com.ultrapartners.ui.tests.pages.BasePage
 import com.ultrapartners.ui.tests.pages.RegistrationPage
 import com.ultrapartners.ui.tests.pages.affiliate.AffiliateMainPage
@@ -22,12 +23,19 @@ fun `Go to Page`(pageName: String) {
 }
 
 fun `Affiliate Login`(login: String, pass: String) {
-    BasePage().openMainPage()
-        .clickLoginButton()
-        .fillInEmailField(login)
-        .fillInPassField(pass)
-        .clickLoginSubmitButton(AffiliateMainPage())
-        .weAreOnAffiliateMain()
+    if (cookies.isEmpty()) {
+        BasePage().openMainPage()
+            .clickLoginButton()
+            .fillInEmailField(login)
+            .fillInPassField(pass)
+            .clickLoginSubmitButton(AffiliateMainPage())
+            .weAreOnAffiliateMain()
+    } else {
+        BasePage()
+            .openMainPage()
+        AffiliateMainPage()
+            .weAreOnAffiliateMain()
+    }
 }
 
 fun `Affiliate Logout`() {

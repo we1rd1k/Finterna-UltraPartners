@@ -22,6 +22,7 @@ class LoginPage {
         emailField.sendKeys(email)
         return this
     }
+
     @Step("Fill in password field: {pass}")
     fun fillInPassField(pass: String): LoginPage {
         log.info("Fill in password field: $pass")
@@ -34,6 +35,7 @@ class LoginPage {
         log.info("Click Log in button, and wait dashboard appears")
         submitButton.click()
         @Suppress("UNCHECKED_CAST")
+//        WebDriverRunner.getWebDriver().manage().cookies
         return pageToGo
     }
 }
